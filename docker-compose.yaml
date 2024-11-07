@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  app:
+    container_name: knote-app
+    image: learnitguide/knotejs:1.0
+    environment:
+      MONGO_URL: mongodb://mongo:27017/dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: knote-mongo
+    image: mongo
+    volumes:
+      - mongo_data:/data/db
+
+  nginx:
+    container_name: knote-nginx
+    image: nginx
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+volumes:
+  mongo_data:
