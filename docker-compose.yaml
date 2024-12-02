@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.7" #can also be version 2 or 3 inorder to lower the standards
 services:
   app:
     container_name: knote-app
